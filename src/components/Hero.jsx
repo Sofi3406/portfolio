@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
     >
       {/* Animated background blobs */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
@@ -28,8 +28,8 @@ const Hero = () => {
 
         {/* Title with animated underline */}
         <div className="relative inline-block mb-8">
-          <p className="text-2xl md:text-3xl text-gray-700 font-light">
-            Full-Stack Web Developer
+          <p className="text-2xl md:text-3xl text-slate-700 dark:text-slate-200 font-light">
+            Full-Stack Web Developer | AI, Data & Marketing Ready
           </p>
           <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
         </div>
@@ -38,30 +38,37 @@ const Hero = () => {
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           <a
             href={`mailto:${personalInfo.email}`}
-            className="group flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 border border-white/50 hover:scale-105"
+            className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 border border-white/50 dark:border-slate-700 hover:scale-105"
           >
             <FaEnvelope className="text-blue-600 group-hover:rotate-12 transition-transform" />
-            <span className="text-gray-700">{personalInfo.email}</span>
+            <span className="text-slate-700 dark:text-slate-200">{personalInfo.email}</span>
           </a>
 
           <a
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 border border-white/50 hover:scale-105"
+            className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 border border-white/50 dark:border-slate-700 hover:scale-105"
           >
             <FaGithub className="text-gray-800 group-hover:rotate-12 transition-transform" />
-            <span className="text-gray-700">GitHub</span>
+            <span className="text-slate-700 dark:text-slate-200">GitHub</span>
           </a>
 
-          <div className="group flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-white/50">
+          <div className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-white/50 dark:border-slate-700">
             <FaPhone className="text-green-600" />
-            <span className="text-gray-700">{personalInfo.phone}</span>
+            <span className="text-slate-700 dark:text-slate-200">{personalInfo.phone}</span>
           </div>
 
-          <div className="group flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-white/50">
+          <div className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-white/50 dark:border-slate-700">
             <FaMapMarkerAlt className="text-red-600" />
-            <span className="text-gray-700">{personalInfo.location}</span>
+            <a
+              href={personalInfo.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-cyan-300 transition-colors"
+            >
+              {personalInfo.location}
+            </a>
           </div>
         </div>
 
@@ -78,7 +85,7 @@ const Hero = () => {
 
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-gray-800 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl border border-white/50 transform hover:-translate-y-1 transition-all duration-300"
+            className="group inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm text-slate-800 dark:text-slate-100 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl border border-white/50 dark:border-slate-700 transform hover:-translate-y-1 transition-all duration-300"
           >
             <span>View my work</span>
             <svg
@@ -101,7 +108,7 @@ const Hero = () => {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <a
             href="#about"
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
           >
             <FaArrowDown size={24} />
           </a>

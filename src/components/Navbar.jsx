@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
-import { FaBars, FaTimes, FaFileDownload } from "react-icons/fa";
+import { FaBars, FaTimes, FaFileDownload, FaMoon, FaSun } from "react-icons/fa";
 
-const Navbar = () => {
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "Education", href: "#education" },
+  { name: "Certifications", href: "#certifications" },
+  { name: "Contact", href: "#contact" },
+];
+
+const Navbar = ({ isDarkTheme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Education", href: "#education" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "Contact", href: "#contact" },
-  ];
 
   // Close mobile menu when a link is clicked
   const handleLinkClick = () => {
@@ -46,10 +46,10 @@ const Navbar = () => {
     return () => {
       observers.forEach((observer) => observer && observer.disconnect());
     };
-  }, [navLinks]);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow-lg z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-lg dark:shadow-black/30 border-b border-white/40 dark:border-slate-800 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -87,8 +87,8 @@ const Navbar = () => {
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors group ${
                     isActive
-                      ? "text-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "text-blue-600 dark:text-cyan-400"
+                      : "text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-cyan-400"
                   }`}
                 >
                   {link.name}
@@ -104,6 +104,16 @@ const Navbar = () => {
 
           {/* Resume Button & Mobile Menu Toggle */}
           <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              className="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm hover:shadow-md transition-all"
+              aria-label={isDarkTheme ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDarkTheme ? <FaSun className="text-amber-400" /> : <FaMoon className="text-slate-700" />}
+              <span>{isDarkTheme ? "Light" : "Dark"}</span>
+            </button>
+
             <a
               href="/resume.pdf" // Replace with your actual resume path
               download
@@ -116,7 +126,7 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-gray-700 hover:text-blue-600 focus:outline-none transition-colors"
+              className="md:hidden text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-cyan-400 focus:outline-none transition-colors"
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
@@ -130,6 +140,18 @@ const Navbar = () => {
           }`}
         >
           <div className="pb-4 space-y-2">
+            <button
+              type="button"
+              onClick={() => {
+                onToggleTheme();
+                handleLinkClick();
+              }}
+              className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mb-2"
+            >
+              {isDarkTheme ? <FaSun className="text-amber-400" /> : <FaMoon />}
+              <span>{isDarkTheme ? "Light mode" : "Dark mode"}</span>
+            </button>
+
             {navLinks.map((link) => {
               const sectionId = link.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -139,8 +161,8 @@ const Navbar = () => {
                   href={link.href}
                   className={`block py-2 px-4 rounded-lg transition-colors ${
                     isActive
-                      ? "bg-blue-50 text-blue-600 font-medium"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-blue-50 text-blue-600 font-medium dark:bg-blue-500/10 dark:text-cyan-400"
+                      : "text-slate-700 hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-800"
                   }`}
                   onClick={handleLinkClick}
                 >

@@ -86,7 +86,7 @@ const categoryStyles = {
 const SkillBadge = ({ skill }) => {
   const icon = getSkillIcon(skill);
   return (
-    <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm border border-gray-200 hover:scale-105 hover:shadow-md transition-all duration-300 group">
+    <span className="inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm border border-gray-200 dark:border-slate-700 hover:scale-105 hover:shadow-md transition-all duration-300 group">
       {icon && <span className="text-lg group-hover:rotate-12 transition-transform">{icon}</span>}
       {skill}
     </span>
@@ -97,7 +97,7 @@ const SkillCategory = ({ title, items }) => {
   const style = categoryStyles[title] || categoryStyles["Tools & Others"];
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${style.bg} p-6 shadow-lg border ${style.border} hover:shadow-xl transition-shadow duration-300`}
+      className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${style.bg} dark:from-slate-900 dark:to-slate-800 p-6 shadow-lg border ${style.border} dark:border-slate-700 hover:shadow-xl transition-shadow duration-300`}
     >
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full -mr-8 -mt-8 blur-2xl"></div>
@@ -105,7 +105,7 @@ const SkillCategory = ({ title, items }) => {
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="text-3xl">{style.icon}</div>
-          <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{title}</h3>
         </div>
         <div className="flex flex-wrap gap-2">
           {items.map((skill, idx) => (
@@ -119,10 +119,10 @@ const SkillCategory = ({ title, items }) => {
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="skills" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Technical Skills</h2>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Technical Skills</h2>
           
         </div>
 

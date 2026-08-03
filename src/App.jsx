@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -11,6 +11,12 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const storedTheme = localStorage.getItem("portfolio-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return storedTheme ? storedTheme === "dark" : prefersDark;
+  });
+
   // Smooth scroll for anchor links
   useEffect(() => {
     const handleHashChange = () => {
@@ -27,10 +33,19 @@ function App() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkTheme);
+    localStorage.setItem("portfolio-theme", isDarkTheme ? "dark" : "light");
+  }, [isDarkTheme]);
+
+  const toggleTheme = () => {
+    setIsDarkTheme((currentTheme) => !currentTheme);
+  };
+
   return (
-    <div className="font-sans antialiased text-gray-800 bg-gray-50">
-      <Navbar />
-      <main>
+    <div className="min-h-screen font-sans antialiased bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+      <Navbar isDarkTheme={isDarkTheme} onToggleTheme={toggleTheme} />
+      <main className="overflow-hidden">
         <Hero />
         <About />
         <Skills />

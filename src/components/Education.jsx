@@ -6,7 +6,7 @@ const Education = () => {
   // const graduationYear = "2024"; // Example
 
   return (
-    <section id="education" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section id="education" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden dark:from-slate-950 dark:to-slate-900">
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -14,16 +14,16 @@ const Education = () => {
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Education
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
-          <p className="text-gray-500 mt-4">My academic background</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-4">My academic background</p>
         </div>
 
         {/* Education card */}
         <div className="max-w-3xl mx-auto">
-          <div className="group bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+          <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl border border-gray-100 dark:border-slate-800">
             {/* Top gradient bar */}
             <div className="h-2 w-full bg-gradient-to-r from-blue-500 to-purple-600"></div>
 
@@ -44,12 +44,12 @@ const Education = () => {
                 <div className="flex-1 text-center md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
                     <FaGraduationCap className="text-blue-600 text-2xl" />
-                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
                       {education.degree}
                     </h3>
                   </div>
 
-                  <p className="text-xl text-blue-600 font-medium mb-4">
+                  <p className="text-xl text-blue-600 dark:text-cyan-300 font-medium mb-4">
                     {education.institution}
                   </p>
 

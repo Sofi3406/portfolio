@@ -8,7 +8,7 @@ const Certifications = () => {
   const icons = [FaCertificate, GiDiploma, MdVerified, FaAward];
 
   return (
-    <section id="certifications" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section id="certifications" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden dark:from-slate-950 dark:to-slate-900">
       {/* Decorative blobs (consistent with other sections) */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -16,11 +16,11 @@ const Certifications = () => {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Certifications & Training
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
-          <p className="text-gray-500 mt-4">Continuous learning and professional development</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-4">Continuous learning and professional development</p>
         </div>
 
         {/* Certifications grid */}
@@ -34,7 +34,7 @@ const Certifications = () => {
             return (
               <div
                 key={index}
-                className="group relative bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl"
+                className="group relative bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl border border-gray-100 dark:border-slate-800"
               >
                 {/* Top gradient bar */}
                 <div className={`h-1.5 w-full bg-gradient-to-r ${gradientFrom} ${gradientTo}`}></div>
@@ -47,7 +47,7 @@ const Certifications = () => {
 
                   {/* Certificate text */}
                   <div className="flex-1">
-                    <p className="text-gray-800 font-medium leading-relaxed">{cert}</p>
+                    <p className="text-gray-800 dark:text-gray-200 font-medium leading-relaxed">{cert}</p>
                     
                     {/* Optional decorative line */}
                     <div className="mt-3 flex items-center gap-2 text-xs text-gray-400">

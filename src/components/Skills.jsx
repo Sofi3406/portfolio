@@ -1,144 +1,39 @@
-import { skills } from "../data";
-import {
-  FaCode,
-  FaServer,
-  FaDatabase,
-  FaPython,
-  FaTools,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
-  FaNodeJs,
-  FaPhp,
-  FaJava,
-  FaBootstrap,
-  FaGitAlt,
-} from "react-icons/fa";
-import {
-  SiTailwindcss,
-  SiExpress,
-  SiMongodb,
-  SiMysql,
-  SiPostgresql,
-  SiCplusplus,
-  SiAdobephotoshop,
-} from "react-icons/si";
+import { createElement } from "react";
+import { FaBookOpen, FaBrain, FaChartBar, FaChartLine, FaCode, FaDatabase, FaFileExcel, FaGitAlt, FaJava, FaJs, FaNodeJs, FaPython, FaReact } from "react-icons/fa";
+import { SiAdobephotoshop, SiBootstrap, SiCplusplus, SiExpress, SiFlutter, SiGithub, SiMongodb, SiMysql, SiNumpy, SiOpencv, SiPandas, SiPostgresql, SiScikitlearn, SiTailwindcss, SiTensorflow } from "react-icons/si";
+import SectionHeading from "./SectionHeading";
 
-// Map skill names to icons (add more as needed)
-const getSkillIcon = (skill) => {
-  const iconMap = {
-    // Frontend
-    HTML: <FaCode />,
-    CSS: <FaCss3Alt />,
-    JavaScript: <FaJs />,
-    React: <FaReact />,
-    Bootstrap: <FaBootstrap />,
-    "Tailwind CSS": <SiTailwindcss />,
-    // Backend
-    "Node.js": <FaNodeJs />,
-    Express: <SiExpress />,
-    PHP: <FaPhp />,
-    // Databases
-    MongoDB: <SiMongodb />,
-    MySQL: <SiMysql />,
-    PostgreSQL: <SiPostgresql />,
-    // Languages
-    Python: <FaPython />,
-    Java: <FaJava />,
-    "C++": <SiCplusplus />,
-    // Tools
-    Git: <FaGitAlt />,
-    GitHub: <FaGitAlt />,
-    "Adobe Photoshop": <SiAdobephotoshop />,
-  };
-  return iconMap[skill] || null;
+const iconMap = {
+  Python: FaPython, Java: FaJava, JavaScript: FaJs, "C++": SiCplusplus, Dart: FaCode,
+  React: FaReact, HTML5: FaCode, CSS3: FaCode, "Tailwind CSS": SiTailwindcss, Bootstrap: SiBootstrap, Flutter: SiFlutter, "Node.js": FaNodeJs, Express: SiExpress,
+  MongoDB: SiMongodb, MySQL: SiMysql, PostgreSQL: SiPostgresql, Git: FaGitAlt, GitHub: SiGithub, "VS Code": FaCode, "Adobe Photoshop": SiAdobephotoshop, "Anaconda Notebook": FaBookOpen, "Jupyter Notebook": FaBookOpen, "Data Analysis": FaChartLine, "AI Training": FaBrain, "Machine Learning": FaBrain, "Computer Vision": FaBrain, "Data Visualization": FaChartLine, FastAPI: FaCode,
+  "Scikit-learn": SiScikitlearn, TensorFlow: SiTensorflow, Pandas: SiPandas, NumPy: SiNumpy, OpenCV: SiOpencv, Matplotlib: FaChartLine, "Power BI": FaChartBar, Excel: FaFileExcel,
 };
 
-// Category styling configuration
-const categoryStyles = {
-  "Front-End": {
-    bg: "from-blue-50 to-indigo-100",
-    border: "border-blue-200",
-    icon: <FaCode className="text-blue-600" />,
-  },
-  "Back-End": {
-    bg: "from-green-50 to-emerald-100",
-    border: "border-green-200",
-    icon: <FaServer className="text-green-600" />,
-  },
-  Databases: {
-    bg: "from-purple-50 to-violet-100",
-    border: "border-purple-200",
-    icon: <FaDatabase className="text-purple-600" />,
-  },
-  "Programming Languages": {
-    bg: "from-orange-50 to-amber-100",
-    border: "border-orange-200",
-    icon: <FaPython className="text-orange-600" />,
-  },
-  "Tools & Others": {
-    bg: "from-pink-50 to-rose-100",
-    border: "border-pink-200",
-    icon: <FaTools className="text-pink-600" />,
-  },
+const categories = [
+  { title: "Programming Languages", icon: FaCode, skills: ["Python", "Java", "JavaScript", "C++", "Dart"] },
+  { title: "Web Development", icon: FaReact, skills: ["React", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap", "Flutter", "Node.js", "Express"] },
+  { title: "Databases", icon: FaDatabase, skills: ["MongoDB", "MySQL", "PostgreSQL"] },
+  { title: "AI & Machine Learning", icon: FaBrain, skills: ["Scikit-learn", "TensorFlow", "Pandas", "NumPy", "OpenCV"] },
+  { title: "Data Science & Analytics", icon: FaChartLine, skills: ["Matplotlib", "Power BI", "Excel", "Data Analysis", "Data Visualization"] },
+  { title: "Tools & Platforms", icon: FaGitAlt, skills: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Adobe Photoshop"] },
+];
+
+const SkillCard = ({ name }) => {
+  const Icon = iconMap[name] || FaCode;
+  return <div className="skill-card flex min-h-24 flex-col items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-2 py-3 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900"><Icon className="text-2xl text-cyan-600 dark:text-cyan-300" /><span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{name}</span></div>;
 };
 
-const SkillBadge = ({ skill }) => {
-  const icon = getSkillIcon(skill);
-  return (
-    <span className="inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm border border-gray-200 dark:border-slate-700 hover:scale-105 hover:shadow-md transition-all duration-300 group">
-      {icon && <span className="text-lg group-hover:rotate-12 transition-transform">{icon}</span>}
-      {skill}
-    </span>
-  );
-};
-
-const SkillCategory = ({ title, items }) => {
-  const style = categoryStyles[title] || categoryStyles["Tools & Others"];
-  return (
-    <div
-      className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${style.bg} dark:from-slate-900 dark:to-slate-800 p-6 shadow-lg border ${style.border} dark:border-slate-700 hover:shadow-xl transition-shadow duration-300`}
-    >
-      {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full -mr-8 -mt-8 blur-2xl"></div>
-
-      <div className="relative z-10">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="text-3xl">{style.icon}</div>
-          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{title}</h3>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {items.map((skill, idx) => (
-            <SkillBadge key={idx} skill={skill} />
-          ))}
-        </div>
+const Skills = () => (
+  <section id="skills" className="reference-section px-4 py-24 sm:px-6">
+    <div className="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="What I work with" title="My Technical" accent="Skills" subtitle="A practical toolkit for building responsive products, connected data systems, and useful digital experiences." />
+      <div className="space-y-10">
+        {categories.map(({ title, icon: CategoryIcon, skills: categorySkills }, categoryIndex) => <div key={title} className={`skill-category skill-category-${categoryIndex}`}><div className="mb-5 flex items-center gap-4"><span className="category-icon flex h-11 w-11 items-center justify-center rounded-xl text-xl">{createElement(CategoryIcon)}</span><h3 className="text-lg font-bold text-slate-900 dark:text-white">{title}</h3><span className="category-rule" /></div><div className={`grid grid-cols-2 gap-3 sm:grid-cols-3 ${title === "Programming Languages" ? "md:grid-cols-6 lg:grid-cols-6" : "md:grid-cols-5"}`}>{categorySkills.map((skill) => <SkillCard key={skill} name={skill} />)}</div></div>)}
       </div>
+      <div className="learning-card mt-12 flex items-start gap-4 rounded-2xl border border-cyan-200 bg-cyan-50/70 p-6 dark:border-cyan-400/20 dark:bg-cyan-400/10"><FaBrain className="mt-1 shrink-0 text-2xl text-cyan-600 dark:text-cyan-300" /><div><h3 className="font-bold text-slate-900 dark:text-white">Continuous Learning</h3><p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">Always exploring new technologies, currently deepening my Qiyas AAU and ALX AI and Data Analysis training.</p></div></div>
     </div>
-  );
-};
-
-const Skills = () => {
-  return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Technical Skills</h2>
-          
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <SkillCategory title="Front-End" items={skills.frontend} />
-          <SkillCategory title="Back-End" items={skills.backend} />
-          <SkillCategory title="Databases" items={skills.databases} />
-          <SkillCategory title="Programming Languages" items={skills.languages} />
-          <div className="lg:col-span-2">
-            <SkillCategory title="Tools & Others" items={skills.tools} />
-          </div>
-        </div>
-       
-      </div>
-    </section>
-  );
-};
+  </section>
+);
 
 export default Skills;

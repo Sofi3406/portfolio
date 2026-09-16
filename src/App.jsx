@@ -5,10 +5,13 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
-import Education from "./components/Education";
+import GithubShowcase from "./components/GithubShowcase";
 import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Chatbot from "./components/Chatbot";
+import BackToTop from "./components/BackToTop";
+import "./App.css";
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
@@ -43,19 +46,22 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans antialiased bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+    <div className="portfolio-shell min-h-screen font-sans antialiased bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
       <Navbar isDarkTheme={isDarkTheme} onToggleTheme={toggleTheme} />
-      <main className="overflow-hidden">
+      <div className="portfolio-grid" aria-hidden="true" />
+      <main className="relative z-10 overflow-hidden">
         <Hero />
         <About />
         <Skills />
         <Experience />
         <Projects />
-        <Education />
+        <GithubShowcase />
         <Certifications />
         <Contact />
       </main>
       <Footer />
+      <Chatbot />
+      <BackToTop />
     </div>
   );
 }

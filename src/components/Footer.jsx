@@ -1,12 +1,8 @@
-const Footer = () => {
-  return (
-    <footer className="bg-slate-950 text-slate-300 py-8 border-t border-slate-800">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <p>&copy; {new Date().getFullYear()} Sofiya Yasin. All rights reserved.</p>
-        <p className="mt-2 text-sm">Built with React & Tailwind CSS</p>
-      </div>
-    </footer>
-  );
-};
+import { FaEnvelope, FaGithub, FaLinkedinIn, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { personalInfo } from "../data";
+
+const Footer = () => (
+  <footer className="border-t border-slate-200 bg-white/80 py-12 text-slate-600 dark:border-slate-800 dark:bg-slate-950/80 dark:text-slate-300"><div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-3"><div><p className="text-xl font-extrabold text-cyan-600 dark:text-cyan-300">Sofiya Yasin</p><p className="mt-3 max-w-xs text-sm leading-6">Full-Stack Web Developer building clean, scalable, user-focused web solutions.</p></div><div><h3 className="font-bold text-slate-900 dark:text-white">Quick Links</h3><div className="mt-3 grid grid-cols-2 gap-2 text-sm"><a href="#about" className="hover:text-cyan-600">About</a><a href="#skills" className="hover:text-cyan-600">Skills</a><a href="#experience" className="hover:text-cyan-600">Experience</a><a href="#projects" className="hover:text-cyan-600">Projects</a><a href="#contact" className="hover:text-cyan-600">Contact</a></div></div><div><h3 className="font-bold text-slate-900 dark:text-white">Get In Touch</h3><div className="mt-3 space-y-2 text-sm"><a href={`mailto:${personalInfo.email}`} className="flex items-center gap-2 hover:text-cyan-600"><FaEnvelope />{personalInfo.email}</a><a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 hover:text-cyan-600"><FaPhone />{personalInfo.phone}</a><a href={personalInfo.mapUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cyan-600"><FaMapMarkerAlt />{personalInfo.location}</a></div><div className="mt-5 flex gap-3"><a href={personalInfo.github} target="_blank" rel="noreferrer" className="social-button" aria-label="GitHub"><FaGithub /></a><a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="social-button" aria-label="LinkedIn"><FaLinkedinIn /></a><a href={`mailto:${personalInfo.email}`} className="social-button" aria-label="Email"><FaEnvelope /></a></div></div></div><div className="mx-auto mt-10 max-w-6xl border-t border-slate-200 px-4 pt-6 text-center text-xs text-slate-500 dark:border-slate-800 sm:px-6">© {new Date().getFullYear()} Sofiya Yasin. All rights reserved.</div></footer>
+);
 
 export default Footer;

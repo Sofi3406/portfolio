@@ -1,72 +1,30 @@
+import { createElement } from "react";
+import { FaBrain, FaCode, FaGraduationCap, FaLightbulb } from "react-icons/fa";
 import { personalInfo } from "../data";
-import { FaQuoteLeft, FaArrowRight } from "react-icons/fa";
+import SectionHeading from "./SectionHeading";
 
-const About = () => {
-  return (
-    <section id="about" className="relative py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden dark:from-slate-950 dark:to-slate-900">
-      {/* Decorative background blobs */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-      
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Excutive Summary
-          </h2>
-         
+const highlights = [
+  { title: "Computer Science Graduate", text: "AAU, algorithms, software engineering", icon: FaGraduationCap },
+  { title: "Full-Stack Developer", text: "React, Node.js, MongoDB, PostgreSQL", icon: FaCode },
+  { title: "AI & Data Enthusiast", text: "Qiyas AAU, ALX, Udacity", icon: FaBrain },
+  { title: "Problem Solver", text: "Real-world apps, collaboration", icon: FaLightbulb },
+];
+
+const About = () => (
+  <section id="about" className="reference-section px-4 py-24 sm:px-6">
+    <div className="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="A little about me" title="About" accent="Me" subtitle="A curious builder focused on useful, thoughtful digital experiences." />
+      <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
+        <div className="about-copy rounded-3xl border border-slate-200/80 bg-white/70 p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/60 sm:p-9">
+          <p className="text-lg leading-9 text-slate-600 dark:text-slate-300">{personalInfo.summary}</p>
+          <a href="#contact" className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-cyan-600 dark:text-cyan-300">Let’s work together <FaLightbulb /></a>
         </div>
-
-        {/* Main content card */}
-        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-100 dark:border-slate-800 transform hover:scale-[1.02] transition-transform duration-300">
-          <div className="relative">
-            {/* Large quote icon */}
-            <FaQuoteLeft className="absolute -top-6 -left-6 text-6xl text-blue-100 dark:text-cyan-900 opacity-50" />
-            
-            {/* Summary text */}
-            <div className="relative z-10 pl-8 md:pl-12">
-                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light italic">
-                {personalInfo.summary}
-              </p>
-            </div>
-            
-            {/* Author signature (optional) */}
-            <div className="mt-8 flex items-center justify-end gap-2 text-gray-500 dark:text-gray-400">
-              <span className="w-12 h-px bg-gray-300 dark:bg-gray-600"></span>
-              <span className="text-sm font-medium">{personalInfo.name}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Call to action link */}
-        <div className="mt-12 text-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-cyan-300 dark:hover:text-cyan-200 font-medium transition-colors group"
-          >
-            <span>Let's work together</span>
-            <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {highlights.map(({ title, text, icon: HighlightIcon }) => <article key={title} className="highlight-card rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">{createElement(HighlightIcon, { className: "mb-5 text-2xl text-cyan-500" })}<h3 className="text-lg font-bold text-slate-900 dark:text-white">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">{text}</p></article>)}
         </div>
       </div>
-
-      {/* Add animation keyframes if not already in global CSS */}
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 10s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default About;

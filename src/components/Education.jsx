@@ -1,5 +1,6 @@
-import { education } from "../data";
+import { education, languages, softSkills } from "../data";
 import { FaGraduationCap, FaCalendarAlt } from "react-icons/fa";
+import SectionHeading from "./SectionHeading";
 
 const Education = () => {
   // Optional: If you have graduation year, you can add it to data and display here
@@ -13,13 +14,7 @@ const Education = () => {
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Education
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
-          <p className="text-gray-500 dark:text-gray-400 mt-4">My academic background</p>
-        </div>
+        <SectionHeading eyebrow="Academic foundation" title="My" accent="Education" subtitle="The foundation behind my approach to software, data, and continuous learning." />
 
         {/* Education card */}
         <div className="max-w-3xl mx-auto">
@@ -53,11 +48,6 @@ const Education = () => {
                     {education.institution}
                   </p>
 
-                  {/* Optional year (if you add to data) */}
-                  {/* <div className="flex items-center justify-center md:justify-start gap-2 text-gray-500">
-                    <FaCalendarAlt className="text-gray-400" />
-                    <span>{graduationYear}</span>
-                  </div> */}
 
                   {/* Decorative line */}
                   <div className="w-24 h-0.5 bg-gradient-to-r from-blue-200 to-purple-200 mx-auto md:mx-0 mt-4"></div>
@@ -68,6 +58,10 @@ const Education = () => {
             {/* Shine effect on hover */}
             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
           </div>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-gray-200 bg-white/70 p-6 dark:border-slate-800 dark:bg-slate-900/60"><h3 className="font-bold text-gray-900 dark:text-white">Languages</h3><p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{languages.join(" · ")}</p></div>
+          <div className="rounded-2xl border border-gray-200 bg-white/70 p-6 dark:border-slate-800 dark:bg-slate-900/60"><h3 className="font-bold text-gray-900 dark:text-white">Soft Skills</h3><p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{softSkills.join(" · ")}</p></div>
         </div>
       </div>
 

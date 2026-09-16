@@ -1,117 +1,58 @@
+import { useEffect, useState } from "react";
+import { FaArrowRight, FaDownload, FaEnvelope, FaGithub, FaGlobe } from "react-icons/fa";
 import { personalInfo } from "../data";
-import {
-  FaGithub,
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaArrowDown,
-} from "react-icons/fa";
+
+const roles = ["AI & Data Enthusiast", "Full-Stack Developer", "Frontend Developer"];
 
 const Hero = () => {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [typedRole, setTypedRole] = useState(roles[0]);
+
+  useEffect(() => {
+    let characterIndex = roles[roleIndex].length;
+    const deleteTimer = setInterval(() => {
+      characterIndex -= 1;
+      setTypedRole(roles[roleIndex].slice(0, characterIndex));
+      if (characterIndex === 0) {
+        clearInterval(deleteTimer);
+        setRoleIndex((currentIndex) => (currentIndex + 1) % roles.length);
+      }
+    }, 90);
+    return () => clearInterval(deleteTimer);
+  }, [roleIndex]);
+
+  useEffect(() => {
+    if (typedRole) return undefined;
+    const role = roles[roleIndex];
+    let characterIndex = 0;
+    const typeTimer = setInterval(() => {
+      characterIndex += 1;
+      setTypedRole(role.slice(0, characterIndex));
+      if (characterIndex === role.length) clearInterval(typeTimer);
+    }, 90);
+    return () => clearInterval(typeTimer);
+  }, [roleIndex, typedRole]);
+
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-    >
-      {/* Animated background blobs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-6000"></div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        {/* Name with gradient */}
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-          {personalInfo.name}
-        </h1>
-
-        {/* Title with animated underline */}
-        <div className="relative inline-block mb-8">
-          <p className="text-2xl md:text-3xl text-slate-700 dark:text-slate-200 font-light">
-            Full-Stack Web Developer | AI, Data & Marketing Ready
-          </p>
-          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-        </div>
-
-        {/* Contact info as stylish cards */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 border border-white/50 dark:border-slate-700 hover:scale-105"
-          >
-            <FaEnvelope className="text-blue-600 group-hover:rotate-12 transition-transform" />
-            <span className="text-slate-700 dark:text-slate-200">{personalInfo.email}</span>
-          </a>
-
-          <a
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 border border-white/50 dark:border-slate-700 hover:scale-105"
-          >
-            <FaGithub className="text-gray-800 group-hover:rotate-12 transition-transform" />
-            <span className="text-slate-700 dark:text-slate-200">GitHub</span>
-          </a>
-
-          <div className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-white/50 dark:border-slate-700">
-            <FaPhone className="text-green-600" />
-            <span className="text-slate-700 dark:text-slate-200">{personalInfo.phone}</span>
+    <section id="home" className="hero-section relative flex min-h-screen items-center justify-center overflow-hidden px-4 pb-16 pt-32 sm:px-6">
+      <div className="hero-glow hero-glow-one" aria-hidden="true" />
+      <div className="hero-glow hero-glow-two" aria-hidden="true" />
+      <div className="relative mx-auto flex w-full max-w-4xl justify-center">
+        <div className="text-center">
+          <p className="mb-5 text-sm font-bold uppercase tracking-[0.28em] text-cyan-600 dark:text-cyan-300">Hello, I’m</p>
+          <h1 className="text-5xl font-extrabold tracking-[-0.06em] text-slate-950 dark:text-white sm:text-7xl">{personalInfo.name}</h1>
+          <h2 className="mt-6 text-2xl font-bold text-slate-800 dark:text-slate-100 sm:text-4xl"><span className="hero-accent">{typedRole}</span><span className="typing-cursor">|</span></h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">Building clean, scalable, user-focused web solutions.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#contact" className="hero-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white shadow-lg shadow-cyan-500/20">Contact Me <FaArrowRight /></a>
+            <a href="#projects" className="hero-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold">View Projects</a>
+            <a href="/resume.pdf" download className="hero-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold"><FaDownload /> Resume</a>
           </div>
-
-          <div className="group flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-white/50 dark:border-slate-700">
-            <FaMapMarkerAlt className="text-red-600" />
-            <a
-              href={personalInfo.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-cyan-300 transition-colors"
-            >
-              {personalInfo.location}
-            </a>
+          <div className="mt-10 flex justify-center gap-3">
+            <a href={personalInfo.github} target="_blank" rel="noreferrer" className="social-button" aria-label="GitHub"><FaGithub /></a>
+            <a href={`mailto:${personalInfo.email}`} className="social-button" aria-label="Email"><FaEnvelope /></a>
+            <a href={personalInfo.website} target="_blank" rel="noreferrer" className="social-button" aria-label="Website"><FaGlobe /></a>
           </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <a
-            href="#contact"
-            className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-          >
-            <span className="relative z-10">Get in touch</span>
-            <FaEnvelope className="relative z-10 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </a>
-
-          <a
-            href="#projects"
-            className="group inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm text-slate-800 dark:text-slate-100 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl border border-white/50 dark:border-slate-700 transform hover:-translate-y-1 transition-all duration-300"
-          >
-            <span>View my work</span>
-            <svg
-              className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </a>
-        </div>
-
-        {/* Scroll down indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <a
-            href="#about"
-            className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
-          >
-            <FaArrowDown size={24} />
-          </a>
         </div>
       </div>
     </section>

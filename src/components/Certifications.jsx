@@ -1,87 +1,33 @@
+import { createElement } from "react";
+import { FaAward, FaBrain, FaChartLine, FaCheckCircle, FaCode } from "react-icons/fa";
 import { certifications } from "../data";
-import { FaCertificate, FaAward } from "react-icons/fa";
-import { GiDiploma } from "react-icons/gi";
-import { MdVerified } from "react-icons/md";
+import SectionHeading from "./SectionHeading";
 
-const Certifications = () => {
-  // Alternate icons for visual variety
-  const icons = [FaCertificate, GiDiploma, MdVerified, FaAward];
+const certificateIcons = [FaCode, FaBrain, FaChartLine, FaAward];
 
-  return (
-    <section id="certifications" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden dark:from-slate-950 dark:to-slate-900">
-      {/* Decorative blobs (consistent with other sections) */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Certifications & Training
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
-          <p className="text-gray-500 dark:text-gray-400 mt-4">Continuous learning and professional development</p>
-        </div>
-
-        {/* Certifications grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {certifications.map((cert, index) => {
-            const IconComponent = icons[index % icons.length];
-            // Generate a gradient color based on index
-            const gradientFrom = index % 2 === 0 ? "from-blue-500" : "from-purple-500";
-            const gradientTo = index % 3 === 0 ? "to-green-500" : index % 3 === 1 ? "to-pink-500" : "to-yellow-500";
-
-            return (
-              <div
-                key={index}
-                className="group relative bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl border border-gray-100 dark:border-slate-800"
-              >
-                {/* Top gradient bar */}
-                <div className={`h-1.5 w-full bg-gradient-to-r ${gradientFrom} ${gradientTo}`}></div>
-
-                <div className="p-6 flex items-start gap-4">
-                  {/* Icon with gradient background */}
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${gradientFrom} ${gradientTo} flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6" />
-                  </div>
-
-                  {/* Certificate text */}
-                  <div className="flex-1">
-                    <p className="text-gray-800 dark:text-gray-200 font-medium leading-relaxed">{cert}</p>
-                    
-                    {/* Optional decorative line */}
-                    <div className="mt-3 flex items-center gap-2 text-xs text-gray-400">
-                     
-                    </div>
-                  </div>
-                </div>
-
-                {/* Shine effect on hover */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+const Certifications = () => (
+  <section id="certifications" className="reference-section px-4 py-24 sm:px-6">
+    <div className="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="Beyond the degree" title="Certifications" accent="& Training" subtitle="Professional credentials and continuous learning." />
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {certifications.map((cert, index) => (
+          <article key={cert.title} className="certification-card flex min-h-40 gap-4 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80">
+            <span className="certification-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-xl text-sky-500 dark:bg-cyan-400/15 dark:text-cyan-300">
+              {createElement(certificateIcons[index % certificateIcons.length])}
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="text-base font-bold leading-6 text-slate-900 dark:text-white">{cert.title}</h3>
+                <FaCheckCircle className="mt-1 shrink-0 text-lg text-emerald-500" aria-label="Verified certification" />
               </div>
-            );
-          })}
-        </div>
-
+              <p className="mt-3 text-sm font-semibold text-sky-500 dark:text-cyan-300">{cert.issuer}</p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{cert.year}{cert.status ? ` · ${cert.status}` : ""}</p>
+            </div>
+          </article>
+        ))}
       </div>
-
-      {/* Animation keyframes (if not already in global CSS) */}
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 10s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Certifications;

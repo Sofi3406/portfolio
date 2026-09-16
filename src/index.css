@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,4 +16,26 @@
 	::selection {
 		@apply bg-blue-600 text-white;
 	}
+}
+
+:root {
+	font-family: 'Manrope', sans-serif;
+	color-scheme: light;
+}
+
+html.dark {
+	color-scheme: dark;
+}
+
+body {
+	margin: 0;
+	background: #f4f8fc;
+}
+
+html.dark body {
+	background: #080d12;
+}
+
+button, a, input, textarea {
+	font: inherit;
 }

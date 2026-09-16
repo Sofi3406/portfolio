@@ -1,27 +1,18 @@
-import { useState, useEffect } from "react";
-import { FaBars, FaTimes, FaFileDownload, FaMoon, FaSun } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
-  { name: "Education", href: "#education" },
-  { name: "Certifications", href: "#certifications" },
   { name: "Contact", href: "#contact" },
 ];
 
 const Navbar = ({ isDarkTheme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("about");
 
-  // Close mobile menu when a link is clicked
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
-
-  // Intersection Observer to detect active section
   useEffect(() => {
     const observers = navLinks.map((link) => {
       const sectionId = link.href.substring(1); // remove '#'
@@ -29,14 +20,8 @@ const Navbar = ({ isDarkTheme, onToggleTheme }) => {
       if (!section) return null;
 
       const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(sectionId);
-            }
-          });
-        },
-        { threshold: 0.5 } // section is considered active when 50% visible
+        ([entry]) => entry.isIntersecting && setActiveSection(sectionId),
+        { rootMargin: "-35% 0px -55%" }
       );
 
       observer.observe(section);
@@ -49,35 +34,16 @@ const Navbar = ({ isDarkTheme, onToggleTheme }) => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-lg dark:shadow-black/30 border-b border-white/40 dark:border-slate-800 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav className="reference-nav fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 rounded-2xl border border-white/70 bg-white/80 px-4 shadow-lg shadow-slate-200/40 backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-950/75 dark:shadow-black/20 sm:px-6">
+      <div className="flex h-[4.5rem] items-center justify-between gap-4">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-0.5">
-              <div className="w-full h-full rounded-full bg-white overflow-hidden flex items-center justify-center">
-                {/* Profile image - replace with your image path */}
-                <img
-                  src="/images/sofiya.png"
-                  alt="Sofiya"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback if image not found
-                    e.target.onerror = null;
-                    e.target.style.display = "none";
-                    e.target.parentElement.innerHTML =
-                      '<span class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">S</span>';
-                  }}
-                />
-              </div>
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-blue-600 transition-all">
-              Sofiya Yasin
-            </span>
+          <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Sofiya Yasin home">
+            <img src="/images/sofiya.png" alt="Sofiya Yasin logo" className="h-8 w-8 rounded-lg border border-slate-200 bg-white object-contain p-1 dark:border-slate-700" />
+            <span className="hidden text-sm font-bold text-slate-900 dark:text-white sm:block">Sofiya Yasin</span>
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
               const sectionId = link.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -85,103 +51,42 @@ const Navbar = ({ isDarkTheme, onToggleTheme }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors group ${
+                  className={`relative px-3 py-2 text-sm font-semibold transition ${
                     isActive
-                      ? "text-blue-600 dark:text-cyan-400"
-                      : "text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-cyan-400"
+                      ? "text-cyan-600 dark:text-cyan-300"
+                      : "text-slate-600 hover:text-cyan-600 dark:text-slate-300"
                   }`}
                 >
                   {link.name}
-                  <span
-                    className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${
-                      isActive ? "scale-x-100" : ""
-                    }`}
-                  ></span>
+                  {isActive && <span className="absolute inset-x-3 -bottom-1 h-0.5 rounded-full bg-cyan-400" />}
                 </a>
               );
             })}
           </div>
 
           {/* Resume Button & Mobile Menu Toggle */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={onToggleTheme}
-              className="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm hover:shadow-md transition-all"
+              className="theme-switch flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
               aria-label={isDarkTheme ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {isDarkTheme ? <FaSun className="text-amber-400" /> : <FaMoon className="text-slate-700" />}
-              <span>{isDarkTheme ? "Light" : "Dark"}</span>
+              {isDarkTheme ? <FaSun className="text-amber-400" /> : <FaMoon />}
             </button>
 
-            <a
-              href="/resume.pdf" // Replace with your actual resume path
-              download
-              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-            >
-              <FaFileDownload />
-              <span>Resume</span>
-            </a>
-
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-cyan-400 focus:outline-none transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 md:hidden dark:border-slate-700 dark:text-slate-200"
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
-            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="pb-4 space-y-2">
-            <button
-              type="button"
-              onClick={() => {
-                onToggleTheme();
-                handleLinkClick();
-              }}
-              className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mb-2"
-            >
-              {isDarkTheme ? <FaSun className="text-amber-400" /> : <FaMoon />}
-              <span>{isDarkTheme ? "Light mode" : "Dark mode"}</span>
-            </button>
-
-            {navLinks.map((link) => {
-              const sectionId = link.href.substring(1);
-              const isActive = activeSection === sectionId;
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`block py-2 px-4 rounded-lg transition-colors ${
-                    isActive
-                      ? "bg-blue-50 text-blue-600 font-medium dark:bg-blue-500/10 dark:text-cyan-400"
-                      : "text-slate-700 hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-800"
-                  }`}
-                  onClick={handleLinkClick}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-            <a
-              href="/resume.pdf"
-              download
-              className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold mt-4"
-              onClick={handleLinkClick}
-            >
-              <FaFileDownload />
-              <span>Download Resume</span>
-            </a>
-          </div>
-        </div>
-      </div>
+        {isOpen && <div className="border-t border-slate-200 py-3 dark:border-slate-800 md:hidden">
+          {navLinks.map((link) => <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">{link.name}</a>)}
+        </div>}
     </nav>
   );
 };

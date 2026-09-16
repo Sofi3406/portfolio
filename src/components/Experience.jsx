@@ -1,94 +1,55 @@
-import { experiences } from "../data";
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaBriefcase, FaCheckCircle } from "react-icons/fa";
+import { alxEducation, education, experiences, qiyasEducation } from "../data";
+import SectionHeading from "./SectionHeading";
 
-const Experience = () => {
-  return (
-    <section id="experience" className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden dark:from-slate-950 dark:to-slate-900">
-      {/* Decorative blobs (consistent with other sections) */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-             Experience
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
-          <p className="text-gray-500 dark:text-gray-400 mt-4">My journey in the tech world</p>
-        </div>
-
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line (hidden on mobile) */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-blue-200 via-purple-200 to-pink-200"></div>
-
-          {experiences.map((exp, index) => {
-            const isEven = index % 2 === 0;
-            return (
-              <div
-                key={index}
-                className={`relative flex flex-col md:flex-row items-center mb-12 ${
-                  isEven ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full border-4 border-white shadow-lg z-10 hidden md:block"></div>
-
-                {/* Content card */}
-                <div
-                  className={`w-full md:w-5/12 ${
-                    isEven ? "md:pr-12" : "md:pl-12"
-                  }`}
-                >
-                  <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 border border-gray-100 dark:border-slate-800 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-                    {/* Header with icon and company */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl text-white">
-                        <FaBriefcase className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                          {exp.role}
-                        </h3>
-                        <p className="text-blue-600 dark:text-cyan-300 font-medium">{exp.company}</p>
-                      </div>
-                    </div>
-
-                    {/* Description list */}
-                    <ul className="space-y-3 text-gray-700 dark:text-gray-300">
-                      {exp.description.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
-                          <span className="text-sm md:text-base">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+const ExperienceCard = ({ experience }) => (
+  <article className="timeline-card rounded-2xl border border-slate-200 bg-white/85 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80 sm:p-7">
+    <div className="flex flex-wrap items-start justify-between gap-4">
+      <div className="flex items-start gap-4">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-lg text-cyan-600 dark:bg-cyan-400/10 dark:text-cyan-300"><FaBriefcase /></span>
+        <div><h3 className="text-lg font-extrabold text-slate-900 dark:text-white">{experience.role}</h3><p className="mt-1 font-semibold text-cyan-600 dark:text-cyan-300">{experience.company}</p></div>
       </div>
+      <span className="text-sm font-medium text-slate-500 dark:text-slate-400">{experience.period}</span>
+    </div>
+    <p className="mt-5 text-sm leading-7 text-slate-600 dark:text-slate-300">{experience.summary}</p>
+    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      {experience.highlights.map((highlight) => <div key={highlight} className="flex items-start gap-2 text-sm leading-6 text-slate-600 dark:text-slate-300"><FaCheckCircle className="mt-1 shrink-0 text-xs text-cyan-500" />{highlight}</div>)}
+    </div>
+    <div className="my-5 border-t border-slate-200 dark:border-slate-800" />
+    <div className="flex flex-wrap items-center gap-2"><span className="mr-1 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Key Technologies:</span>{experience.technologies.map((technology) => <span key={technology} className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-400/10 dark:text-cyan-300">{technology}</span>)}</div>
+  </article>
+);
 
-      {/* Animation keyframes (if not in global CSS) */}
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 10s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
-    </section>
-  );
-};
+const EducationCard = () => (
+  <article className="timeline-card rounded-2xl border border-slate-200 bg-white/85 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 sm:p-7">
+    <div className="flex flex-wrap items-start justify-between gap-4"><div className="flex items-start gap-4"><span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-1 dark:bg-slate-100"><img src="/images/Addis_Ababa_University_logo.png" alt="Addis Ababa University logo" className="h-full w-full object-contain" /></span><div><h3 className="text-lg font-extrabold text-slate-900 dark:text-white">{education.degree}</h3><p className="mt-1 font-semibold text-cyan-600 dark:text-cyan-300">{education.institution}</p></div></div><span className="text-sm font-medium text-slate-500 dark:text-slate-400">{education.years}</span></div>
+    <p className="mt-5 text-sm leading-7 text-slate-600 dark:text-slate-300">Strong foundation in algorithms, data structures, software engineering, and computer systems.</p>
+    <div className="mt-5 flex flex-wrap gap-2"><span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-400/10 dark:text-cyan-300">Bachelor&apos;s Degree</span></div>
+  </article>
+);
+
+const QiyasCard = () => (
+  <article className="timeline-card rounded-2xl border border-slate-200 bg-white/85 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 sm:p-7">
+    <div className="flex flex-wrap items-start justify-between gap-4"><div className="flex items-start gap-4"><span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-1 dark:bg-slate-100"><img src="/images/Addis_Ababa_University_logo.png" alt="Addis Ababa University logo" className="h-full w-full object-contain" /></span><div><h3 className="text-lg font-extrabold text-slate-900 dark:text-white">{qiyasEducation.degree}</h3><p className="mt-1 font-semibold text-cyan-600 dark:text-cyan-300">{qiyasEducation.institution}</p></div></div><span className="text-sm font-medium text-slate-500 dark:text-slate-400">{qiyasEducation.years}</span></div>
+    <p className="mt-5 text-sm leading-7 text-slate-600 dark:text-slate-300">{qiyasEducation.description}</p>
+    <div className="mt-5 flex flex-wrap gap-2"><span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-400/10 dark:text-cyan-300">{qiyasEducation.badge}</span></div>
+  </article>
+);
+
+const AlxCard = () => (
+  <article className="timeline-card rounded-2xl border border-slate-200 bg-white/85 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 sm:p-7">
+    <div className="flex flex-wrap items-start justify-between gap-4"><div className="flex items-start gap-4"><span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-1 dark:bg-slate-100"><img src="/images/Alx.jpg" alt="ALX Ethiopia logo" className="h-full w-full object-contain" /></span><div><h3 className="text-lg font-extrabold text-slate-900 dark:text-white">{alxEducation.degree}</h3><p className="mt-1 font-semibold text-cyan-600 dark:text-cyan-300">{alxEducation.institution}</p></div></div><span className="text-sm font-medium text-slate-500 dark:text-slate-400">{alxEducation.years}</span></div>
+    <p className="mt-5 text-sm leading-7 text-slate-600 dark:text-slate-300">{alxEducation.description}</p>
+    <div className="mt-5 flex flex-wrap gap-2"><span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-400/10 dark:text-cyan-300">{alxEducation.badge}</span></div>
+  </article>
+);
+
+const Experience = () => (
+  <section id="experience" className="reference-section px-4 py-24 sm:px-6">
+    <div className="mx-auto max-w-5xl"><SectionHeading eyebrow="Where I’ve grown" title="Work" accent="Experience" subtitle="A practical journey through frontend, full-stack development, and computer science." />
+      <div className="timeline-rail space-y-7">{experiences.map((experience) => <div className="timeline-entry" key={experience.company}><ExperienceCard experience={experience} /></div>)}<div className="timeline-entry"><AlxCard /></div><div className="timeline-entry"><QiyasCard /></div><div className="timeline-entry"><EducationCard /></div></div>
+    </div>
+  </section>
+);
 
 export default Experience;

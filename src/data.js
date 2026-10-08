@@ -125,7 +125,7 @@ export const projects = [
     description: "A full-stack attendance platform combining a React dashboard, Node/Express backend, MongoDB, and Python computer vision service.",
     stack: ["React", "Node.js", "Express", "MongoDB", "Python", "FastAPI", "face_recognition"],
     github: "https://github.com/Sofi3406/AI_Powered_Attendance_Management_System",
-    image: "/images/image recognation.jpg",
+    image: "/images/attendance.jpg",
   },
   {
     title: "Handwritten Digit Recognition",
@@ -134,7 +134,7 @@ export const projects = [
     description: "A custom dataset, CNN training, and deployment project for recognizing handwritten digits.",
     stack: ["Python", "CNN", "Computer Vision", "Data Analysis"],
     github: "https://github.com/Sofi3406/Handwritten-Digit-Recognition",
-    image: "/images/attendance.jpg",
+    image: "/images/image recognation.jpg",
   },
 ];
 

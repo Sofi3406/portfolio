@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaArrowRight, FaDownload, FaEnvelope, FaGithub, FaGlobe } from "react-icons/fa";
+import { FaArrowRight, FaEnvelope, FaGithub, FaGlobe } from "react-icons/fa";
 import { personalInfo } from "../data";
 
 const roles = ["AI & Data Enthusiast", "Full-Stack Developer", "Frontend Developer"];
@@ -46,7 +46,6 @@ const Hero = () => {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a href="#contact" className="hero-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white shadow-lg shadow-cyan-500/20">Contact Me <FaArrowRight /></a>
             <a href="#projects" className="hero-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold">View Projects</a>
-            <a href="/resume.pdf" download className="hero-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold"><FaDownload /> Resume</a>
           </div>
           <div className="mt-10 flex justify-center gap-3">
             <a href={personalInfo.github} target="_blank" rel="noreferrer" className="social-button" aria-label="GitHub"><FaGithub /></a>

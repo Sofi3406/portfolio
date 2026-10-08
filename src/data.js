@@ -87,6 +87,27 @@ export const projects = [
     description: "Designed and developed a full-stack system for managing reports and organizing events.",
     stack: ["React", "Node.js", "Express", "MongoDB"],
     github: "https://github.com/Sofi3406/YEGARA_PROJECT",
+    image: "/images/yegara.jpg",
+  },
+  {
+    title: "Mareko Special Wereda Administration Platform",
+    problem: "Regional municipal operations and citizen communication needed a more accessible digital home.",
+    solution: "Built a responsive administration platform with a public portal, role-based access control, analytics dashboard, and RESTful backend for managing regional services and announcements.",
+    description: "A full-stack municipal platform for administrative operations, public services, announcements, and citizen interaction.",
+    stack: ["React", "Tailwind CSS", "Vite", "Node.js", "Express", "MongoDB"],
+    github: "https://github.com/Sofi3406/Mareko_Special_Wereda_Administration",
+    deployment: "https://marekospecialwereda.vercel.app/",
+    image: "/images/mareko.jpg",
+  },
+  {
+    title: "SLMA (Silte Lmat Mahber) Platform",
+    problem: "A community organization needed a simple digital home for membership and services.",
+    solution: "Developed a community-focused application with membership features and accessible digital services.",
+    description: "Developed a community-focused application with membership and digital services.",
+    stack: ["TypeScript", "Next.js", "MongoDB", "Node.js"],
+    github: "https://github.com/Sofi3406/yenberi",
+    deployment: "https://slmaweb12.vercel.app/",
+    image: "/images/slma.jpg",
   },
   {
     title: "Yebragi Psychotherapy Web Platform",
@@ -95,14 +116,7 @@ export const projects = [
     description: "Built a full-stack web platform supporting structured workflows, user management, and client-facing experiences.",
     stack: ["React", "Node.js", "Express", "REST APIs"],
     github: "https://github.com/Sofi3406/yebragi-psychotherapics_web_platform",
-  },
-  {
-    title: "SLMA (Silte Lmat Mahber) Platform",
-    problem: "A community organization needed a simple digital home for membership and services.",
-    solution: "Developed a community-focused application with membership features and accessible digital services.",
-    description: "Developed a community-focused application with membership and digital services.",
-    stack: ["React", "MongoDB", "Node.js"],
-    github: "https://github.com/Sofi3406/yenberi",
+    image: "/images/psychology.jpg",
   },
   {
     title: "AI-Powered Visual Attendance System",
@@ -111,6 +125,7 @@ export const projects = [
     description: "A full-stack attendance platform combining a React dashboard, Node/Express backend, MongoDB, and Python computer vision service.",
     stack: ["React", "Node.js", "Express", "MongoDB", "Python", "FastAPI", "face_recognition"],
     github: "https://github.com/Sofi3406/AI_Powered_Attendance_Management_System",
+    image: "/images/image recognation.jpg",
   },
   {
     title: "Handwritten Digit Recognition",
@@ -119,6 +134,7 @@ export const projects = [
     description: "A custom dataset, CNN training, and deployment project for recognizing handwritten digits.",
     stack: ["Python", "CNN", "Computer Vision", "Data Analysis"],
     github: "https://github.com/Sofi3406/Handwritten-Digit-Recognition",
+    image: "/images/attendance.jpg",
   },
 ];
 
